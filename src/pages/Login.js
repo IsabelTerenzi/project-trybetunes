@@ -11,12 +11,6 @@ class Login extends React.Component {
     loading: false,
   }
 
-  onInputChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState(() => ({ [name]: value }),
-      this.verificaBotaoLogin);
-  }
-
   verificaBotaoLogin = () => {
     const { nameLogin } = this.state;
     const minInput = 3;
@@ -25,6 +19,12 @@ class Login extends React.Component {
     } else {
       this.setState({ isLoginButtonDisabled: true });
     }
+  }
+
+  onInputChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState(() => ({ [name]: value }),
+      this.verificaBotaoLogin);
   }
 
   botaoSalvar = async () => {

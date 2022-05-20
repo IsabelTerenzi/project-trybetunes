@@ -10,14 +10,14 @@ class MusicCard extends React.Component {
   }
 
   botaoFavorita = async ({ target }) => {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState(() => ({ [name]: value }));
+    const { value } = target;
 
     this.setState({
       loading: true,
       isFavorite: true,
     });
+
+    await addSong(value);
 
     const { isFavorite } = this.state;
 

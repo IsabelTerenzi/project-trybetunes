@@ -29,17 +29,18 @@ class Album extends React.Component {
     return (
       <div data-testid="page-album">
         {musicas.length > 0 && (
-          <div>
+          <div className="capa-cd">
             <h1 data-testid="artist-name">{musicas[0].artistName}</h1>
             <h3 data-testid="album-name">{musicas[0].collectionName}</h3>
             <img src={ musicas[0].artworkUrl100 } alt={ musicas[0].collectionName } />
           </div>
         )}
         { musicas.map((musica, index) => index > 0 && (
-          <div key={ index }>
+          <div className="music-card" key={ index }>
             <MusicCard
               trackName={ musica.trackName }
               previewUrl={ musica.previewUrl }
+              trackId={ musica.trackId }
             />
           </div>
         ))}

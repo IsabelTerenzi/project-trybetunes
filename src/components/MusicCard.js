@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 class MusicCard extends React.Component {
@@ -10,14 +10,22 @@ class MusicCard extends React.Component {
   }
 
   botaoFavorita = async ({ target }) => {
-    const { value } = target;
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState(() => ({ [name]: value }));
 
     this.setState({
       loading: true,
       isFavorite: true,
     });
 
-    await addSong(value);
+    const { isFavorite } = this.state;
+
+    if (isFavorite) {
+      await addSong(value);
+    } else {
+      await removeSong(value);
+    }
 
     this.setState({
       loading: false,

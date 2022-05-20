@@ -43,8 +43,8 @@ class Login extends React.Component {
   render() {
     const { isLoginButtonDisabled, nameLogin, userSave, loading } = this.state;
     return (
-      <div data-testid="page-login">
-        <h1>Login</h1>
+      <div data-testid="page-login" className="login">
+        <h1>Login:</h1>
         { loading ? (<Loading />) : (
           <form>
             <label htmlFor="nameLogin">

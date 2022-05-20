@@ -17,3 +17,47 @@ code {
   display: flex;
   justify-content: center;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: rgb(60, 58, 58);
+  padding: 15px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: rgb(181, 177, 177);
+  color: rgb(11, 74, 5);
+  padding: 10px;
+  font-size: larger;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.albums {
+
+  display: inline-flex;
+  padding: 5px;
+  text-align: center;
+}

@@ -50,7 +50,7 @@ class Search extends React.Component {
       albums, artista } = this.state;
 
     return (
-      <div data-testid="page-search">
+      <div data-testid="page-search" className="search">
         { loading ? (<Loading />) : (
           <form>
             <label htmlFor="search-input">
@@ -80,14 +80,14 @@ class Search extends React.Component {
             <div>
               {
                 albums.map((album, index) => (
-                  <div key={ index }>
+                  <div key={ index } className="albums">
                     <Link
                       to={ `/album/${album.collectionId}` }
                       data-testid={ `link-to-album-${album.collectionId}` }
                     >
                       <img src={ album.artworkUrl100 } alt={ album.collectionName } />
-                      <p>{album.collectionName}</p>
-                      <p>{album.trackCount}</p>
+                      <p>{`${album.collectionName}`}</p>
+                      <p>{`Tracks: ${album.trackCount}`}</p>
                     </Link>
                   </div>))
               }

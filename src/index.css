@@ -60,3 +60,22 @@ h1 {
   padding: 5px;
   text-align: center;
 }
+
+.capa-cd {
+  margin-left: 3%;
+}
+
+.music-card {
+  margin-left: 3%;
+}
+
+.profile {
+  display: inline-block;
+  color: rgb(16, 15, 15);
+  background-color: #FAFAFA;
+  border-radius: 5%;
+  margin: 10% 40%;
+  text-align: center;
+  border: 4px solid #080808;
+  padding: 20px;
+}

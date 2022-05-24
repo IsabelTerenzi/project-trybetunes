@@ -28,8 +28,7 @@ class Profile extends React.Component {
     return (
       <section>
         { loading ? (<Loading />) : (
-          <div data-testid="page-profile">
-            <h1>Profile</h1>
+          <div data-testid="page-profile" className="profile">
             <h2>{user.name}</h2>
             <h3>{user.email}</h3>
             <h3>{user.description}</h3>

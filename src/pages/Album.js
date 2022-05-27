@@ -10,7 +10,7 @@ class Album extends React.Component {
     favorites: [],
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.carregaAlbum();
   }
 
@@ -45,6 +45,8 @@ class Album extends React.Component {
               trackName={ musica.trackName }
               previewUrl={ musica.previewUrl }
               trackId={ musica.trackId }
+              name="favorita"
+              musicas={ musicas }
               favorites={ favorites }
               carregaFavoritas={ this.carregaAlbum }
             />

@@ -7,6 +7,7 @@ class Favorites extends React.Component {
   state = {
     loading: false,
     isFavorite: false,
+    favorites: [],
   }
 
   componentDidMount = async () => {
@@ -15,7 +16,7 @@ class Favorites extends React.Component {
       isFavorite: true,
     });
 
-    await getFavoriteSongs();
+    const favoritas = await getFavoriteSongs();
 
     const { isFavorite } = this.state;
 
@@ -27,17 +28,20 @@ class Favorites extends React.Component {
 
     this.setState({
       loading: false,
+      favorites: favoritas,
     });
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, favorites } = this.state;
     return (
       <section>
         { loading ? (<Loading />) : (
           <div data-testid="page-favorites">
-            <h1>Favorites</h1>
-            <MusicCard />
+            <h1>Favoritas</h1>
+            <MusicCard
+              favorites={ favorites }
+            />
           </div>
         )}
       </section>

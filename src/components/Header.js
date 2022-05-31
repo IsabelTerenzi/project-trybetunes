@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IoHeadsetSharp } from 'react-icons/io5';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
 
@@ -32,13 +33,44 @@ class Header extends React.Component {
         { loading ? (<Loading />)
           : (
             <header data-testid="header-user-name">
-              <h1>TrybeTunes</h1>
-              <h2>{user.name}</h2>
+              <Link
+                to="/"
+                style={ { textDecoration: 'none' } }
+                className="bel-tunes"
+              >
+                BelTunes
+              </Link>
+              <IoHeadsetSharp size={ 70 } color="rgb(43, 218, 81)" />
+              <Link
+                to="/profile"
+                className="username"
+                style={ { textDecoration: 'none' } }
+              >
+                {user.name}
+              </Link>
             </header>) }
-        <nav>
-          <Link to="/search" data-testid="link-to-search">Pesquisa</Link>
-          <Link to="/favorites" data-testid="link-to-favorites">Músicas Favoritas</Link>
-          <Link to="/profile" data-testid="link-to-profile">Perfil</Link>
+        <nav className="navbar">
+          <Link
+            to="/search"
+            data-testid="link-to-search"
+            style={ { textDecoration: 'none' } }
+          >
+            Search
+          </Link>
+          <Link
+            to="/favorites"
+            data-testid="link-to-favorites"
+            style={ { textDecoration: 'none' } }
+          >
+            Favorite Songs
+          </Link>
+          <Link
+            to="/profile"
+            data-testid="link-to-profile"
+            style={ { textDecoration: 'none' } }
+          >
+            Profile
+          </Link>
         </nav>
       </div>
     );

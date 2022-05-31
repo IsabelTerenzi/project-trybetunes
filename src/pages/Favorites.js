@@ -1,35 +1,28 @@
 import React from 'react';
-import { getFavoriteSongs, addSong, removeSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from '../components/Loading';
 import MusicCard from '../components/MusicCard';
 
 class Favorites extends React.Component {
   state = {
     loading: false,
-    isFavorite: false,
     favorites: [],
   }
 
-  componentDidMount = async () => {
-    this.setState({
-      loading: true,
-      isFavorite: true,
+  componentDidMount() {
+    this.atualizaLista();
+  }
+
+  atualizaLista = () => {
+    this.setState({ loading: true }, async () => {
+      const favoritas = await getFavoriteSongs();
+      this.setState({ loading: false, favorites: favoritas });
     });
+  };
 
-    const favoritas = await getFavoriteSongs();
-
-    const { isFavorite } = this.state;
-
-    if (isFavorite) {
-      await addSong();
-    } else {
-      await removeSong();
-    }
-
-    this.setState({
-      loading: false,
-      favorites: favoritas,
-    });
+  checkbox = async () => {
+    const favoritasNova = await getFavoriteSongs();
+    this.setState({ favorites: favoritasNova });
   }
 
   render() {
@@ -37,11 +30,19 @@ class Favorites extends React.Component {
     return (
       <section>
         { loading ? (<Loading />) : (
-          <div data-testid="page-favorites">
+          <div data-testid="page-favorites" className="favorites">
             <h1>Favoritas</h1>
-            <MusicCard
-              favorites={ favorites }
-            />
+            {favorites.map((favorite, index) => (
+              <MusicCard
+                key={ index }
+                trackId={ favorite.trackId }
+                trackName={ favorite.trackName }
+                previerUrl={ favorite.previewUrl }
+                favorites={ favorites }
+                atualizaLista={ this.atualizaLista }
+                onChange={ this.checkbox }
+              />
+            ))}
           </div>
         )}
       </section>

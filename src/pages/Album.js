@@ -12,6 +12,7 @@ class Album extends React.Component {
 
   componentDidMount = () => {
     this.carregaAlbum();
+    this.carregaFavoritas();
   }
 
   carregaAlbum = async () => {
@@ -19,12 +20,14 @@ class Album extends React.Component {
     const { id } = match.params;
 
     const resultado = await getMusics(id);
+
+    this.setState({ musicas: resultado });
+  }
+
+  carregaFavoritas = async () => {
     const resultado2 = await getFavoriteSongs();
 
-    this.setState({
-      musicas: resultado,
-      favorites: resultado2,
-    });
+    this.setState({ favorites: resultado2 });
   }
 
   render() {
@@ -33,22 +36,24 @@ class Album extends React.Component {
     return (
       <div data-testid="page-album">
         {musicas.length > 0 && (
-          <div className="capa-cd">
+          <div className="album-cover">
             <h1 data-testid="artist-name">{musicas[0].artistName}</h1>
             <h3 data-testid="album-name">{musicas[0].collectionName}</h3>
-            <img src={ musicas[0].artworkUrl100 } alt={ musicas[0].collectionName } />
+            <img
+              src={ musicas[0].artworkUrl100 }
+              alt={ musicas[0].collectionName }
+            />
           </div>
         )}
-        { musicas.map((musica, index) => index > 0 && (
-          <div className="music-card" key={ index }>
+        { musicas.map(({ trackName, previewUrl, trackId }, index) => index > 0 && (
+          <div className="music-card">
             <MusicCard
-              trackName={ musica.trackName }
-              previewUrl={ musica.previewUrl }
-              trackId={ musica.trackId }
-              name="favorita"
+              key={ index }
+              trackName={ trackName }
+              previewUrl={ previewUrl }
+              trackId={ trackId }
               musicas={ musicas }
               favorites={ favorites }
-              carregaFavoritas={ this.carregaAlbum }
             />
           </div>
         ))}

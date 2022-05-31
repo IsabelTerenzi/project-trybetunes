@@ -17,22 +17,23 @@ class MusicCard extends React.Component {
     }
   }
 
-  botaoFavorita = async ({ target: { checked } }) => {
+  botaoFavorita = ({ target: { checked } }) => {
     const { isFavorite } = this.state;
-    this.setState({ isFavorite: checked, loading: true });
+    const { trackId, trackName, previewUrl, atualizaLista } = this.props;
 
-    const { trackId } = this.props;
+    this.setState({ isFavorite: checked, loading: true }, async () => {
+      if (isFavorite) {
+        atualizaLista();
+        await removeSong({ trackName, trackId, previewUrl });
+      } else {
+        await addSong({ trackName, trackId, previewUrl });
+      }
 
-    if (isFavorite) {
-      await removeSong({ trackId });
-    } else {
-      await addSong({ trackId });
-    }
-
-    this.setState({
-      loading: false,
+      this.setState({
+        loading: false,
+      });
     });
-  }
+  };
 
   render() {
     const { loading, isFavorite } = this.state;
@@ -42,23 +43,23 @@ class MusicCard extends React.Component {
         { loading ? (<Loading />) : (
           <div>
             <h3>{trackName}</h3>
-            <label htmlFor="favorita">
-              Favorita
-              <input
-                data-testid={ `checkbox-music-${trackId}` }
-                type="checkbox"
-                value={ trackId }
-                id="favorita"
-                name="favorita"
-                onChange={ this.botaoFavorita }
-                checked={ isFavorite }
-              />
-            </label>
             <audio data-testid="audio-component" src={ previewUrl } controls>
               <track kind="captions" />
               O seu navegador não suporta o elemento
               <code>audio</code>
             </audio>
+            <br />
+            <br />
+            <label htmlFor={ trackId }>
+              Favorita
+              <input
+                data-testid={ `checkbox-music-${trackId}` }
+                type="checkbox"
+                id={ trackId }
+                onChange={ this.botaoFavorita }
+                checked={ isFavorite }
+              />
+            </label>
           </div>
         )}
       </div>
@@ -71,6 +72,7 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
+  atualizaLista: PropTypes.func.isRequired,
 };
 
 export default MusicCard;

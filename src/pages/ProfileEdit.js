@@ -71,7 +71,7 @@ class ProfileEdit extends React.Component {
     return (
       <section>
         { loading ? (<Loading />) : (
-          <div data-testid="page-profile-edit">
+          <div data-testid="page-profile-edit" className="edit-form">
             <h1>Editar perfil</h1>
             <form>
               <label htmlFor="editar-nome">
@@ -86,6 +86,8 @@ class ProfileEdit extends React.Component {
                   onChange={ this.onInputChange }
                 />
               </label>
+              <br />
+              <br />
               <label htmlFor="editar-email">
                 <input
                   name="email"
@@ -98,8 +100,10 @@ class ProfileEdit extends React.Component {
                   placeholder="email"
                 />
               </label>
+              <br />
+              <br />
               <label htmlFor="editar-descricao">
-                <input
+                <textarea
                   name="description"
                   type="text"
                   data-testid="edit-input-description"
@@ -108,8 +112,12 @@ class ProfileEdit extends React.Component {
                   onChange={ this.onInputChange }
                   defaultValue={ description }
                   placeholder="descrição"
+                  cols="21"
+                  rows="5"
                 />
               </label>
+              <br />
+              <br />
               <label htmlFor="editar-imagem">
                 <input
                   name="image"
@@ -122,6 +130,8 @@ class ProfileEdit extends React.Component {
                   placeholder="imagem"
                 />
               </label>
+              <br />
+              <br />
               <button
                 type="button"
                 data-testid="edit-button-save"

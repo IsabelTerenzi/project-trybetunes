@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IoHeadsetSharp } from 'react-icons/io5';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from '../components/Loading';
 
@@ -51,6 +52,7 @@ class Search extends React.Component {
 
     return (
       <div data-testid="page-search" className="search">
+        <h1>Search:</h1>
         { loading ? (<Loading />) : (
           <form>
             <label htmlFor="search-input">
@@ -75,18 +77,21 @@ class Search extends React.Component {
           </form>
         )}
         { albums.length > 0 && (
-          <section>
-            <p>{ `Resultado de álbuns de: ${artista}`}</p>
+          <section className="album-card">
+            <IoHeadsetSharp size={ 30 } color="rgb(43, 218, 81)" />
+            <p className="results">{ `Resultado de álbuns de: ${artista}`}</p>
             <div>
               {
                 albums.map((album, index) => (
-                  <div key={ index } className="albums">
+                  <div key={ index }>
                     <Link
                       to={ `/album/${album.collectionId}` }
                       data-testid={ `link-to-album-${album.collectionId}` }
+                      style={ { textDecoration: 'none' } }
+                      className="album-link"
                     >
                       <img src={ album.artworkUrl100 } alt={ album.collectionName } />
-                      <p>{`${album.collectionName}`}</p>
+                      <h3>{`${album.collectionName}`}</h3>
                       <p>{`Tracks: ${album.trackCount}`}</p>
                     </Link>
                   </div>))

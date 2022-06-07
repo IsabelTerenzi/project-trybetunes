@@ -20,11 +20,6 @@ class Favorites extends React.Component {
     });
   };
 
-  checkbox = async () => {
-    const favoritasNova = await getFavoriteSongs();
-    this.setState({ favorites: favoritasNova });
-  }
-
   render() {
     const { loading, favorites } = this.state;
     return (
@@ -40,7 +35,6 @@ class Favorites extends React.Component {
                 previerUrl={ favorite.previewUrl }
                 favorites={ favorites }
                 atualizaLista={ this.atualizaLista }
-                onChange={ this.checkbox }
               />
             ))}
           </div>

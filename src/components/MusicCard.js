@@ -6,27 +6,17 @@ import { addSong, removeSong } from '../services/favoriteSongsAPI';
 class MusicCard extends React.Component {
   state = {
     loading: false,
-    isFavorite: false,
-  }
-
-  componentDidMount = () => {
-    const { favorites, trackId } = this.props;
-    const musicaFavorita = favorites.some((favorita) => favorita.trackId === trackId);
-    if (musicaFavorita) {
-      this.setState({ isFavorite: true });
-    }
   }
 
   botaoFavorita = ({ target: { checked } }) => {
-    const { isFavorite } = this.state;
     const { trackId, trackName, previewUrl, atualizaLista } = this.props;
-
-    this.setState({ isFavorite: checked, loading: true }, async () => {
-      if (isFavorite) {
-        atualizaLista();
+    this.setState({ loading: true }, async () => {
+      if (!checked) {
         await removeSong({ trackName, trackId, previewUrl });
+        atualizaLista();
       } else {
         await addSong({ trackName, trackId, previewUrl });
+        atualizaLista();
       }
 
       this.setState({
@@ -36,7 +26,7 @@ class MusicCard extends React.Component {
   };
 
   render() {
-    const { loading, isFavorite } = this.state;
+    const { loading } = this.state;
     const { trackName, previewUrl, trackId } = this.props;
     return (
       <div>
@@ -57,7 +47,8 @@ class MusicCard extends React.Component {
                 type="checkbox"
                 id={ trackId }
                 onChange={ this.botaoFavorita }
-                checked={ isFavorite }
+                checked={ JSON.parse(localStorage.getItem('favorite_songs'))
+                  .some((favorita) => favorita.trackId === trackId) }
               />
             </label>
           </div>
@@ -71,7 +62,6 @@ MusicCard.propTypes = {
   trackName: PropTypes.string.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
-  favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
   atualizaLista: PropTypes.func.isRequired,
 };
 

@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(54, 54, 173);
+  background-color: #2941AB;
 }
 
 code {
@@ -33,7 +33,7 @@ h1{
 
 .navbar {
   color: white;
-  background-color: rgb(43, 218, 81);
+  background-color: #1ED760;
   display: flex;
   justify-content: space-evenly;
   padding: 16px;
@@ -81,7 +81,7 @@ button{
 }
 
 button:hover{
-  background-color: rgb(43, 218, 81);
+  background-color: #1ED760;
   color: black;
 }
 
@@ -108,13 +108,13 @@ button:hover{
 }
 
 .album-link {
-  color: rgb(43, 218, 81);
+  color: #1ED760;
 }
 
 .album-card {
   display: inline-block;
   text-align: center;
-  margin-right: 30%;
+  margin-right: 25%;
 }
 
 .album-cover {
@@ -135,33 +135,49 @@ button:hover{
 .profile {
   display: inline-block;
   color: rgb(0, 0, 0);
-  background-color: #FAFAFA;
+  background-color:#1ED760;
   border-radius: 10%;
-  margin: 5% 40%;
-  text-align: center;
-  border: 4px solid #080808;
-  padding: 20px;
+  margin: 8% 40%;
+  text-align: justify;
+  padding: 35px;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 200%;
 }
 
 .profile img{
   border-radius: 50%;
-  max-width: 80%;
+  max-width: 50%;
+  margin-bottom: 8%;
+  margin-left: 25%;
 }
 
 .edit-profile {
- justify-content: center;
+  padding: 5%;
+  margin-left: 22%;
 }
 
 .favorites {
-  display: inline-block;
+  display: inline;
   text-align: center;
   margin-right: 30%;
   padding: 20px;
   color: white;
+  align-items: center;
 }
 
 .edit-form {
   display: inline-block;
-  justify-content: space-evenly;
-  margin: 20px 40%;
+  background-color:#1ED760;
+  border-radius: 5%;
+  margin: 6% 42%;
+  text-align: justify;
+  padding: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  line-height: 200%;  
+}
+
+.not-found {
+  display: inline-block;
+  margin-left: 40%;
+  margin-top: 5%;
 }
